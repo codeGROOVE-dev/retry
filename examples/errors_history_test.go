@@ -29,7 +29,7 @@ func TestErrorHistory(t *testing.T) {
 			if err != nil {
 				return err
 			}
-			defer func() { _ = resp.Body.Close() }()
+			defer resp.Body.Close() //nolint:errcheck // Error already checked in main function
 			if resp.StatusCode != http.StatusOK {
 				return fmt.Errorf("failed HTTP - %d", resp.StatusCode)
 			}

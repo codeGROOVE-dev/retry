@@ -24,8 +24,6 @@ func (e *RetriableError) Error() string {
 	return fmt.Sprintf("%s (retry after %v)", e.Err.Error(), e.RetryAfter)
 }
 
-var _ error = (*RetriableError)(nil)
-
 // TestCustomRetryFunction shows how to use a custom retry function.
 func TestCustomRetryFunction(t *testing.T) {
 	attempts := 5 // server succeeds after 5 attempts
@@ -35,12 +33,12 @@ func TestCustomRetryFunction(t *testing.T) {
 			// HTTP 429 status code with Retry-After header in seconds
 			w.Header().Add("Retry-After", "1")
 			w.WriteHeader(http.StatusTooManyRequests)
-			_, _ = w.Write([]byte("Server limit reached"))
+			w.Write([]byte("Server limit reached")) //nolint:errcheck // Test server response
 			attempts--
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte("hello"))
+		w.Write([]byte("hello")) //nolint:errcheck // Test server response
 	}))
 	defer ts.Close()
 

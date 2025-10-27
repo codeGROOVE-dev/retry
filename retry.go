@@ -82,7 +82,7 @@ func Do(retryableFunc RetryableFunc, opts ...Option) error {
 // By default, it will retry up to 10 times with exponential backoff and jitter.
 // The behavior can be customized using Option functions.
 //
-//nolint:gocognit,gocyclo,revive // Complexity is necessary for retry logic
+//nolint:gocognit,gocyclo // Complexity is necessary for retry logic
 func DoWithData[T any](retryableFunc RetryableFuncWithData[T], opts ...Option) (T, error) {
 	var attempt uint
 	var emptyT T

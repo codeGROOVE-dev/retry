@@ -741,7 +741,7 @@ func BenchmarkDo(b *testing.B) {
 	testError := errors.New("test error")
 
 	for range b.N {
-		_ = Do(
+		Do( //nolint:errcheck // Benchmark intentionally ignores errors
 			func() error {
 				return testError
 			},
@@ -755,7 +755,7 @@ func BenchmarkDoWithData(b *testing.B) {
 	testError := errors.New("test error")
 
 	for range b.N {
-		_, _ = DoWithData(
+		DoWithData( //nolint:errcheck // Benchmark intentionally ignores errors
 			func() (int, error) {
 				return 0, testError
 			},
@@ -767,7 +767,7 @@ func BenchmarkDoWithData(b *testing.B) {
 
 func BenchmarkDoNoErrors(b *testing.B) {
 	for range b.N {
-		_ = Do(
+		Do( //nolint:errcheck // Benchmark intentionally ignores errors
 			func() error {
 				return nil
 			},
@@ -779,7 +779,7 @@ func BenchmarkDoNoErrors(b *testing.B) {
 
 func BenchmarkDoWithDataNoErrors(b *testing.B) {
 	for range b.N {
-		_, _ = DoWithData(
+		DoWithData( //nolint:errcheck // Benchmark intentionally ignores errors
 			func() (int, error) {
 				return 0, nil
 			},

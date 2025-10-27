@@ -38,7 +38,7 @@ func (err SomeOtherError) Error() string {
 
 func TestCustomRetryFunctionBasedOnKindOfError(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		_, _ = fmt.Fprintln(w, "hello")
+		fmt.Fprintln(w, "hello") //nolint:errcheck // Test server response
 	}))
 	defer ts.Close()
 

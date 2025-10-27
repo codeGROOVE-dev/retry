@@ -1,4 +1,4 @@
-package retry //nolint:revive // More than 5 public structs are necessary for API flexibility
+package retry
 
 import (
 	"context"
