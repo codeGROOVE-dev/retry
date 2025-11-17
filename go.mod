@@ -1,3 +1,3 @@
 module github.com/codeGROOVE-dev/retry
 
-go 1.24
+go 1.23
